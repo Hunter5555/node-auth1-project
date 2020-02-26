@@ -1,18 +1,25 @@
 const db = require("../config/knexConfig.js");
 
 module.exports = {
-  findUser,
+  findUsers,
   findUserById,
+  findUserByUsername,
   addUser
 };
 
-function findUser() {
+function findUsers() {
   return db("users");
 }
 
 function findUserById(id) {
   return db("users")
     .where({ id })
+    .first();
+}
+
+function findUserByUsername(username) {
+  return db("users")
+    .where({ username })
     .first();
 }
 

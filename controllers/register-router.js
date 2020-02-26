@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const Users = require("../users/users-model.js");
+const restricted = require("../middleware/restricted.js");
 
-router.get("/", async (req, res) => {
+router.get("/", restricted, async (req, res) => {
   try {
-    const users = await Users.findUser();
+    const users = await Users.findUsers();
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json(error);
